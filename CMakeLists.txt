@@ -55,4 +55,6 @@ project(crunch)
 	#target_link_libraries(${PROJECT_NAME} d3dcompiler DXGI D3D12 imgui)
 
     file(GLOB_RECURSE TO_COPY  "crnlib/*.h" )
+    file(GLOB_RECURSE TO_COPY_2  "inc/*.h" )
 	file(COPY ${TO_COPY} DESTINATION "${CMAKE_SOURCE_DIR}/ResourceCompilerPlugins/TextureCompilerPlugin/vendors/includes/crnlib" )
+	file(COPY ${TO_COPY_2} DESTINATION "${CMAKE_SOURCE_DIR}/ResourceCompilerPlugins/TextureCompilerPlugin/vendors/includes/crnlib" )
