@@ -45,16 +45,21 @@ project(crunch)
 
     #adding the executable
     add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES} ${INCLUDES_FILES})
+	target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDES_FILES})
 
-	#setting the plug-in folder in the solution
-	set_target_properties (${PROJECT_NAME} PROPERTIES
-    FOLDER vendors)
-
-	SET(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-
-	#target_link_libraries(${PROJECT_NAME} d3dcompiler DXGI D3D12 imgui)
+	if(APPLE)
+	elseif(UNIX)
+	elseif(WIN32)
+		#copying built lib to the output
+		add_custom_command(
+		TARGET ${PROJECT_NAME} 
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy
+		  $<TARGET_FILE:${PROJECT_NAME}>
+		  ${CMAKE_SOURCE_DIR}/../builtDependencies/windows/$<CONFIGURATION>/$<TARGET_FILE_NAME:${PROJECT_NAME}>)		
+	endif()
 
     file(GLOB_RECURSE TO_COPY  "crnlib/*.h" )
     file(GLOB_RECURSE TO_COPY_2  "inc/*.h" )
-	file(COPY ${TO_COPY} DESTINATION "${CMAKE_SOURCE_DIR}/ResourceCompilerPlugins/TextureCompilerPlugin/vendors/includes/crnlib" )
-	file(COPY ${TO_COPY_2} DESTINATION "${CMAKE_SOURCE_DIR}/ResourceCompilerPlugins/TextureCompilerPlugin/vendors/includes/crnlib" )
+	file(COPY ${TO_COPY} DESTINATION ${CMAKE_SOURCE_DIR}/../builtDependencies/includes/crnlib )
+	file(COPY ${TO_COPY_2} DESTINATION ${CMAKE_SOURCE_DIR}/../builtDependencies/includes/crnlib )
