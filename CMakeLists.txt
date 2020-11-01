@@ -15,7 +15,7 @@ project(crunch)
 	add_compile_definitions(  _LIB _UNICODE)
 
 	#making sure to add the common cpp flags, that are defined in the main cpp file
-    set(COMMON_CXX_FLAGS "${COMMON_CXX_FLAGS}  /std:c++17 /W4 /arch:AVX2 /fp:fast /MP")
+    set(COMMON_CXX_FLAGS "${COMMON_CXX_FLAGS}  /std:c++17 /W0 /arch:AVX2 /fp:fast /MP")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMMON_CXX_FLAGS}")
 
 
